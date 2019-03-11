@@ -1,8 +1,15 @@
 {% if photoElement %}
   {{ setBackgroundTint(photoData.dark) }}
-  {% set locationInfo = [photoData.city, photoData.country] %}
 
-  <div class="wb-unsplash-bg-attribution">Shot by {{ photoData.authorName }} in {{ locationInfo | join(", ") }} on Unsplash</div>
+  <div class="wb-unsplash-bg-attribution">
+    Shot by {{ photoData.authorName }}
+    {% set comma = joiner() %}
+    {% if photoData.location | length %}
+      in {% if photoData.location.city | length %}{{ comma() }} {{ photoData.location.city }}{% endif %}
+      {% if photoData.location.country | length %}{{ comma() }} {{ photoData.location.country }}{% endif %}
+    {% endif %}
+    on Unsplash
+  </div>
   <img src="{{ photoElement.src }}" style="opacity: {{ config.brightImageOpacity if photoData.isLight else config.backgroundOpacity }};">
 
   {% if "top" in config.addBackgroundFade %}

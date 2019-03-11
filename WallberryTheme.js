@@ -91,8 +91,8 @@ Module.register("WallberryTheme", {
 		}
 
 		this.photoError = null;
-		var req = new XMLHttpRequest();
-		var mod = this;
+		let req = new XMLHttpRequest();
+		let mod = this;
 
 		req.addEventListener("load", function() {
 			const unsplashData = JSON.parse(this.responseText);
@@ -139,8 +139,7 @@ Module.register("WallberryTheme", {
 		p.dark = WBColor.hsv2Rgb({h:p.color.h, s:40, v:7});
 		// TODO: the s/v values above are hardcoded because they seemed to work well in many cases, but it might be nice to have these be configurable
 		p.authorName = photoData.user.name;
-		p.city = photoData.location.city;
-		p.country = photoData.location.country;
+		p.location = photoData.location;
 		this.photoData = p;
 
 		let img = document.createElement("img");
