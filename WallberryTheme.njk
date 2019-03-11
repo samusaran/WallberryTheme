@@ -1,7 +1,8 @@
 {% if photoElement %}
   {{ setBackgroundTint(photoData.dark) }}
+  {% set locationInfo = [photoData.city, photoData.country] %}
 
-  <div class="wb-unsplash-bg-attribution">Photo by {{ photoData.authorName }} on Unsplash</div>
+  <div class="wb-unsplash-bg-attribution">Shot by {{ photoData.authorName }} in {{ locationInfo | join(", ") }} on Unsplash</div>
   <img src="{{ photoElement.src }}" style="opacity: {{ config.brightImageOpacity if photoData.isLight else config.backgroundOpacity }};">
 
   {% if "top" in config.addBackgroundFade %}
